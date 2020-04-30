@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WPFCalc\ROCalc.csproj" />
+    <ProjectReference Include="..\ROCalc\ROCalc.csproj" />
   </ItemGroup>
 
 </Project>
