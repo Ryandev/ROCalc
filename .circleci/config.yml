@@ -1,0 +1,32 @@
+version: 2.1
+
+workflows:
+  build_test_archive:
+    jobs:
+      - build_test_archive
+
+orbs:
+  win: circleci/windows@2.2.0
+
+jobs:
+  build_test_archive:
+    description: Setup,build,test,publish application
+    executor: win/default
+    steps:
+      - checkout
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - run:
+          name: "Build project"
+          command: dotnet.exe build --configuration Release
+      - run:
+          name: "Run Tests"
+          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+      - store_test_results:
+          path: test_coverage
+      - run:
+          name: "Publish project"
+          command: dotnet.exe publish .\ROCalc\ROCalc.csproj -r win10-x64 -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true
+      - store_artifacts:
+          path: ROCalc\bin\Release\netcoreapp3.1\win10-x64\publish\ROCalc.exe

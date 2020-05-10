@@ -1,0 +1,10 @@
+.vs
+test_coverage
+ROCalc/bin
+ROCalc/obj
+ROCalc/debug
+
+UnitTest/bin
+UnitTest/obj
+UnitTest/debug
+
